@@ -1,4 +1,5 @@
 #include <vector>
+#include "Graph.h"
 
 
 class Graph{
