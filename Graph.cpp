@@ -1,5 +1,5 @@
 #include <vector>
-#include "Graph.h"
+#include "Graph.h"dddd
 
 
 class Graph{
@@ -13,12 +13,17 @@ public:
     }
 
     bool isInfected(int nodeInd){
-        std::vector<int>::iterator it;
-        for (it = infected.begin(); it != infected.end(); ++it){
-            if (infected[*(it)] == nodeInd)
+        for (int i = 0; i < infected.size(); ++i){
+            if (infected[i] == nodeInd)
                 return true;
         }
         return false;
+    }
+    void removeEdges(int nodeInd){
+        for(int i = nodeInd; i < edges.size(); ++i){
+            edges[nodeInd][i] = 0;
+            edges[i][nodeInd] = 0;
+        }
     }
 
 private:
