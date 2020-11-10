@@ -1,40 +1,13 @@
 #include "Tree.h"
 
-class Session;
-
-class Tree{
-public:
-    Tree(int rootLabel);
-    void addChild(const Tree& child);
 
 
-    static Tree* createTree(const Session& session, int rootLabel);
-    virtual int traceTree()=0;
-private:
-    int node;
-    std::vector<Tree*> children;
+Tree::Tree(int rootLabel): node(rootLabel),children(){}
+
+Tree * Tree::createTree(const Session &session, int rootLabel) {
+
 }
+void Tree::addChild(const Tree &child) {}
 
-class CycleTree: public Tree{
-public:
-    CycleTree(int rootLabel, int currCycle);
-    virtual int traceTree();
-private:
-    int currCycle;
-}
-
-class MaxRankTree: public Tree{
-public:
-    MaxRankTree(int rootLabel);
-    virtual int traceTree();
-}
-
-class RootTree: public Tree{
-public:
-    RootTree(int rootLabel);
-    virtual int traceTree();
-};
-
-#endif
 
 
