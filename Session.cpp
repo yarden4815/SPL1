@@ -12,28 +12,28 @@
 Session::Session(const std::string &path) {}
 
 Tree * Session::BFS(int node) {
-    Tree* tree = new Tree(node);
-    std::queue<*Tree> queue;
-    std::vector<int> neighbours = g.getNeighbours(node);
+    Tree* tree = Tree::createTree(*this,node);
+    std::queue<Tree*> queue;
+    std::vector<int> neighbours;
     std::vector<bool> visited(g.getSize(),false);
     queue.push(tree);
     visited[node] = true;
 
     while(!queue.empty()){
-        Tree* temp = queue.pop();
+        Tree* temp = queue.front();
+        queue.pop();
+        neighbours = g.getNeighbours(temp->getNode());
         for(int i = 0; i < neighbours.size(); i++){
-            if(neighbours[i] == 1 && !visit[i]) {
-                Tree* child = new Tree(i);
-                temp->addChild(child);
-                temp = child;
+            if(!visited[neighbours[i]]) {
+                Tree* child = Tree::createTree(*this,neighbours[i]);
+                temp->addChild(*child);
                 queue.push(child);
                 visited[i] = true;
-                neighbours = g.getNeighbours(i);
-
         }
         }
 
     }
+    return tree;
 }
 
 
