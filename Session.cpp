@@ -13,7 +13,7 @@ Session::Session(const std::string &path) {}
 Tree * Session::BFS(int node) {
     Tree* tree = new Tree(node);
     std::queue<int> queue;
-    std::vector<vector<int>> edges = g.getEdges();
+    std::vector<std::vector<int>> edges = g.getEdges();
     std::vector<bool> visit(g.getSize(),false);
     queue.push(node);
     visit[node] = true;
@@ -28,6 +28,9 @@ Tree * Session::BFS(int node) {
         }
 
     }
+}
+
+Graph & Session::getGraph() const {
 }
 
 

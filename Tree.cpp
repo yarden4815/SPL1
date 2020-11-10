@@ -1,4 +1,6 @@
 #include "Tree.h"
+#include "Graph.h"
+#include <vector>
 
 
 
@@ -10,7 +12,7 @@ Tree * Tree::createTree(const Session &session, int rootLabel) {
 
 }
 void Tree::addChild(const Tree &child) {
-
+    children.push_back(child);
 }
 
 
