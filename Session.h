@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include "Graph.h"
+#include "Tree.h"
 
 class Agent;
 
@@ -20,10 +21,13 @@ public:
     void simulate();
     void addAgent(const Agent& agent);
     void setGraph(const Graph& graph);
+    Graph& getGraph() const;
+    Tree* BFS(int node);
     
     void enqueueInfected(int);
     int dequeueInfected();
     TreeType getTreeType() const;
+
     
 private:
     Graph g;

@@ -1,25 +1,11 @@
 #include "Session.h"
 #include "Agent.h"
 
-class Agent{
-public:
-    Agent(Session& session): session(session){
-    }
+Agent::Agent(Session &session) {
 
-    virtual void act() = 0;
+}
+void Agent::act() {
 
-
-private:
-    Session& session;
-};
-
-class ContactTracer: public Agent{
-public:
-    ContactTracer();
-
-    virtual void act(){
-
-    }
-};
+}
 
 

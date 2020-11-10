@@ -6,7 +6,8 @@
 class Graph{
 public:
     Graph(std::vector<std::vector<int>> matrix);
-    
+    int getSize() const;
+    std::vector<std::vector<int>> getEdges() const;
     void infectNode(int nodeInd);
     bool isInfected(int nodeInd);
 private:

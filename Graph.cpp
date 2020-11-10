@@ -23,6 +23,8 @@
             edges[i][nodeInd] = 0;
         }
     }
+    int Graph::getSize() const {return edges.size();}
+    std::vector<std::vector<int>> Graph::getEdges() const {return edges;}
     ;
 
 
