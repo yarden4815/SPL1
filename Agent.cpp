@@ -4,8 +4,6 @@
 Agent::Agent(Session &session) {
 
 }
-void Agent::act() {
-
-}
+void ContactTracer::ContactTracer() {}
 
 

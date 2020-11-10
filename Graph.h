@@ -10,8 +10,10 @@ public:
     std::vector<std::vector<int>> getEdges() const;
     void infectNode(int nodeInd);
     bool isInfected(int nodeInd);
+    std::vector<int> getNeighbours() const;
 private:
     std::vector<std::vector<int>> edges;
+    std::vector<int> infected;
 };
 
 #endif

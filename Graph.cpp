@@ -25,6 +25,9 @@
     }
     int Graph::getSize() const {return edges.size();}
     std::vector<std::vector<int>> Graph::getEdges() const {return edges;}
+    std::vector<int> Graph::getNeighbours() const {
+        for(int i=0; )
+}
     ;
 
 
