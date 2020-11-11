@@ -9,6 +9,7 @@ class Tree{
 public:
     Tree(int rootLabel);
     void addChild(const Tree& child);
+    int getNode() const;
 
 
     static Tree* createTree(const Session& session, int rootLabel);

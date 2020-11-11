@@ -24,9 +24,16 @@
         }
     }
     int Graph::getSize() const {return edges.size();}
+
     std::vector<std::vector<int>> Graph::getEdges() const {return edges;}
-    std::vector<int> Graph::getNeighbours() const {
-        for(int i=0; )
+
+    std::vector<int> Graph::getNeighbours(int node) const {
+        std::vector<int> neighbours;
+        for(int i=0; i < edges.size(); i++ ){
+            if(edges[node][i] == 1)
+                neighbours.push_back(i);
+        }
+        return neighbours;
 }
     ;
 
