@@ -10,7 +10,7 @@ public:
     
     virtual void act()=0;
 protected:
-    Session& session;
+    Session &session;
 };
 
 class ContactTracer: public Agent{

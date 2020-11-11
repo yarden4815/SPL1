@@ -19,7 +19,7 @@ Session::Session(const std::string &path) {
     g=Graph(j["graph"]);
     for(int i = 0; i < j["agents"].size(); i++){
         if(j["agents"][i][0] == "V")
-            agents.push_back(j["agents"][i][0]);
+
 
     }
 

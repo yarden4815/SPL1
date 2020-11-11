@@ -4,7 +4,7 @@
 Agent::Agent(Session &session): session(session) {
 
 }
-ContactTracer::ContactTracer(Session& session): session(session) {}
+ContactTracer::ContactTracer(Session &session): session(session) {}
 
 void ContactTracer::act() {}
 
