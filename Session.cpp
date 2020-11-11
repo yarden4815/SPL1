@@ -3,13 +3,27 @@
 //
 #include <vector>
 #include <string>
+#include <fstream>
 #include "Graph.h"
 #include "Session.h"
 #include "Tree.h"
 #include "queue"
+#include "json.hpp"
 
 
-Session::Session(const std::string &path) {}
+
+Session::Session(const std::string &path) {
+    std:: ifstream file(path);
+    nlohmann:: json j;
+    file >> j;
+    g=Graph(j["graph"]);
+    for(int i = 0; i < j["agents"].size(); i++){
+        if(j["agents"][i][0] == "V")
+            agents.push_back(j["agents"][i][0]);
+
+    }
+
+}
 
 Tree * Session::BFS(int node) {
     Tree* tree = Tree::createTree(*this,node);
