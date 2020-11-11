@@ -36,6 +36,9 @@ Tree * Session::BFS(int node) {
     return tree;
 }
 
+Graph & Session::getGraph() const {
+}
+
 
 
 
