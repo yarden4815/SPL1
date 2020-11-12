@@ -6,9 +6,9 @@
 
 class Agent{
 public:
-    Agent(Session& session);
+    Agent();
     
-    virtual void act()=0;
+    virtual void act(Session& session)=0;
 };
 
 class ContactTracer: public Agent{

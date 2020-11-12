@@ -1,16 +1,16 @@
 #include "Session.h"
 #include "Agent.h"
 
-Agent::Agent(Session &session): session(session) {
+Agent::Agent() {}
 
-}
-ContactTracer::ContactTracer(Session &session): session(session) {}
 
-void ContactTracer::act() {}
+ContactTracer::ContactTracer() {}
 
-Virus::Virus(int nodeInd, Session &session): nodeInd(nodeInd), session(session) {}
+void ContactTracer::act(Session &session) {}
 
-void Virus::act() {}
+Virus::Virus(int nodeInd) {}
+
+void Virus::act(Session &session) {}
 
 Virus Virus::clone() {
 }
