@@ -10,14 +10,14 @@ public:
     
     virtual void act()=0;
 protected:
-    Session& session;
+    Session &session;
 };
 
 class ContactTracer: public Agent{
 public:
-    ContactTracer(Session& session);
+    ContactTracer();
     
-    virtual void act();
+    virtual void act(Session& session);
 };
 
 
