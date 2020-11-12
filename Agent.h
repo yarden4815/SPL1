@@ -6,11 +6,9 @@
 
 class Agent{
 public:
-    Agent(Session& session);
+    Agent();
     
-    virtual void act()=0;
-protected:
-    Session &session;
+    virtual void act(Session& session)=0;
 };
 
 class ContactTracer: public Agent{
@@ -23,9 +21,9 @@ public:
 
 class Virus: public Agent{
 public:
-    Virus(int nodeInd, Session& session);
+    Virus(int nodeInd);
     
-    virtual void act();
+    virtual void act(Session& session);
 
     Virus clone();
 
