@@ -37,6 +37,7 @@
         }
     }
     int Graph::getSize() const {return edges.size();}
+std::queue<int> Graph::getInfectedQueue() {return infectedQueue;}
 
     std::vector<std::vector<int>> Graph::getEdges() const {return edges;}
 

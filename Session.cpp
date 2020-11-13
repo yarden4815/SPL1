@@ -36,9 +36,15 @@ Session::Session(const std::string &path) : g(std::vector<std::vector<int>>()),t
 
 
     }
-
-
-
+void Session::enqueueInfected(int node) {
+    g.infectNode(node);
+}
+int Session::dequeueInfected() {
+    int front = g.getInfectedQueue().front();
+    g.getInfectedQueue().pop();
+    return front;
+}
+void Session::addAgent(const Agent &agent) { agents.push_back(agent.clone());}
 Tree * Session::BFS(int node) {
     Tree* tree = Tree::createTree(*this,node);
     std::queue<Tree*> queue;

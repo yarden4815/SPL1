@@ -34,6 +34,7 @@ private:
     Graph g;
     TreeType treeType;
     std::vector<Agent*> agents;
+    int currCycle;
 };
 
 #endif

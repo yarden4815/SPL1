@@ -7,17 +7,14 @@ Agent::Agent() {
 
 
 ContactTracer::ContactTracer() {}
-
-void ContactTracer::act(Session &session) {
-
-}
+Agent * ContactTracer::clone() const {return new ContactTracer();}
+void ContactTracer::act(Session &session) {}
 
 Virus::Virus(int nodeInd): nodeInd(nodeInd) {}
-
+Agent * Virus::clone() const {return new Virus(nodeInd);}
 void Virus::act(Session &session) {}
 
-Virus Virus::clone() {
-}
+
 
 
 
