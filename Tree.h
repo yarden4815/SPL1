@@ -10,10 +10,12 @@ public:
     Tree(int rootLabel);
     void addChild(const Tree& child);
     int getNode() const;
+    std::vector<Tree*> getChildren();
     virtual Tree* clone() const = 0;
     static Tree* createTree(const Session& session, int rootLabel);
     virtual int traceTree()=0;
-private:
+
+protected:
     int node;
     std::vector<Tree*> children;
 };
