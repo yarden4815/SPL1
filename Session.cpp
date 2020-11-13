@@ -70,7 +70,7 @@ Tree * Session::BFS(int node) {
     return tree;
 }
 int Session::getCurrCycle() const {return currCycle;}
-Graph Session::getGraph() const  {return g;}
+Graph& Session::getGraph()   {return g;}
 void Session::setGraph(const Graph &graph) {
     g=graph;
 }

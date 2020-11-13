@@ -24,7 +24,7 @@
         return false;
     }
     bool Graph::isCarrier(int nodeInd) {
-        for (int i = 0; i < infected.size(); ++i){
+        for (int i = 0; i < carrier.size(); ++i){
             if (carrier[i] == nodeInd)
                 return true;
         }

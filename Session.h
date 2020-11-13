@@ -21,7 +21,7 @@ public:
     void simulate();
     void addAgent(const Agent& agent);
     void setGraph(const Graph& graph);
-    Graph getGraph() const;
+    Graph& getGraph();
     Tree* BFS(int node);
     
     void enqueueInfected(int);

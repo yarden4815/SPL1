@@ -24,6 +24,7 @@ public:
     Virus(int nodeInd);
     
     virtual void act(Session& session);
+    void spreadVirus(Session& session);
 
     virtual Agent* clone() const;
 
