@@ -4,10 +4,11 @@
 
 
 
-  Graph::  Graph(std::vector<std::vector<int>> matrix) : edges(matrix){}
+  Graph::Graph(std::vector<std::vector<int>> matrix) : edges(matrix), infected(std::vector<int>()),carrier(std::vector<int>()),infectedQueue(std::queue<int>()){}
 
    void Graph::infectNode(int nodeInd){
         infected.push_back(nodeInd);
+        infectedQueue.push(nodeInd);
     }
 
     bool Graph:: isInfected(int nodeInd){

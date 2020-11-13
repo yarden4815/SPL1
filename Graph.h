@@ -1,5 +1,6 @@
 #ifndef GRAPH_H_
 #define GRAPH_H_
+#include "queue"
 
 #include <vector>
 
@@ -15,6 +16,8 @@ public:
 private:
     std::vector<std::vector<int>> edges;
     std::vector<int> infected;
+    std::queue<int> infectedQueue;
+    std::vector<int> carrier;
 };
 
 #endif
