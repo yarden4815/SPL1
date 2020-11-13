@@ -13,6 +13,8 @@ public:
     bool isInfected(int nodeInd);
     std::vector<int> getNeighbours(int node) const;
     void removeEdges(int nodeInd);
+    void carrierToInfected(int nodeInd);
+    bool isCarrier(int nodeInd);
 private:
     std::vector<std::vector<int>> edges;
     std::vector<int> infected;

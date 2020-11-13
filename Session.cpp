@@ -14,7 +14,7 @@
 
 
 
-Session::Session(const std::string &path) : g(std::vector<std::vector<int>>()),treeType(),agents() {
+Session::Session(const std::string &path) : g(std::vector<std::vector<int>>()),treeType(),agents(),currCycle(0) {
     std:: ifstream file(path);
     nlohmann:: json j;
     file >> j;
@@ -37,7 +37,7 @@ Session::Session(const std::string &path) : g(std::vector<std::vector<int>>()),t
 
     }
 
-}
+
 
 Tree * Session::BFS(int node) {
     Tree* tree = Tree::createTree(*this,node);
@@ -63,10 +63,11 @@ Tree * Session::BFS(int node) {
     }
     return tree;
 }
-
-Graph & Session::getGraph() const {
+int Session::getCurrCycle() const {return currCycle;}
+Graph Session::getGraph() const  {return g;}
+void Session::setGraph(const Graph &graph) {
+    g=graph;
 }
-
 
 
 

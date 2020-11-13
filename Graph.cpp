@@ -6,8 +6,13 @@
 
   Graph::Graph(std::vector<std::vector<int>> matrix) : edges(matrix), infected(std::vector<int>()),carrier(std::vector<int>()),infectedQueue(std::queue<int>()){}
 
+  void Graph::carrierToInfected(int nodeInd) {
+      infected.push_back(nodeInd);
+  }
+
+
    void Graph::infectNode(int nodeInd){
-        infected.push_back(nodeInd);
+        carrier.push_back(nodeInd);
         infectedQueue.push(nodeInd);
     }
 
@@ -18,6 +23,13 @@
         }
         return false;
     }
+    bool Graph::isCarrier(int nodeInd) {
+        for (int i = 0; i < infected.size(); ++i){
+            if (carrier[i] == nodeInd)
+                return true;
+        }
+        return false;
+}
    void Graph:: removeEdges(int nodeInd){
         for(int i = nodeInd; i < edges.size(); ++i){
             edges[nodeInd][i] = 0;
@@ -36,6 +48,7 @@
         }
         return neighbours;
 }
+
     ;
 
 
