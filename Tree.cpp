@@ -1,6 +1,7 @@
 #include "Tree.h"
 #include "Graph.h"
 #include "Session.h"
+#include <iostream>
 
 
 
@@ -24,9 +25,14 @@ void Tree::addChild(const Tree& child) {
     Tree* clone = child.clone();
     children.push_back(clone);
 }
+
+void Tree::addChild(Tree *child) {
+    children.push_back(child);
+}
 MaxRankTree::MaxRankTree(int rootLabel) :Tree(rootLabel){}
 
 int MaxRankTree::traceTree() {
+
     std::queue<Tree*> queue;
    int maxNode = getNode();
    int maxRank = children.size();
@@ -34,13 +40,15 @@ int MaxRankTree::traceTree() {
     while(!queue.empty()){
         Tree* temp = queue.front();
         queue.pop();
-        if(temp->getChildren().size() > maxRank) {
-            maxRank = getChildren().size();
+        std::vector<Tree*> child=temp->getChildren();
+        if(child.size() > maxRank) {
+            maxRank = child.size();
             maxNode = temp->getNode();
+
         }
-        for(int i = 0; i < getChildren().size(); i++){
+        for(int i = 0; i < child.size(); i++){
              {
-                queue.push(children[i]);
+                queue.push(child[i]);
             }
         }
 
@@ -57,6 +65,7 @@ Tree * RootTree::clone() const {
     return new RootTree(getNode());
 }
 int RootTree::traceTree() {
+
     return node;
 }
 CycleTree::CycleTree(int rootLabel, int currCycle) : Tree(rootLabel), currCycle(currCycle){}
@@ -64,6 +73,7 @@ Tree * CycleTree::clone() const {
     return new CycleTree(getNode(),currCycle);
 }
 int CycleTree::traceTree() {
+
     int tempCycle = currCycle;
     Tree *tempChild = this;
     while (tempCycle > 0 && tempChild->getChildren()[0] != nullptr) {

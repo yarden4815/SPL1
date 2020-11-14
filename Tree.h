@@ -9,6 +9,7 @@ class Tree{
 public:
     Tree(int rootLabel);
     void addChild(const Tree& child);
+    void addChild(Tree* child);
     int getNode() const;
     std::vector<Tree*> getChildren();
     virtual Tree* clone() const = 0;
