@@ -1,14 +1,20 @@
 #include "Session.h"
 #include "Agent.h"
 
-Agent::Agent() {
-
-}
+Agent::Agent() {}
 
 
 ContactTracer::ContactTracer() {}
 Agent * ContactTracer::clone() const {return new ContactTracer();}
-void ContactTracer::act(Session &session) {}
+void ContactTracer::act(Session &session) {
+    if (!session.getGraph().getInfectedQueue().empty()) {
+        int start = session.dequeueInfected();
+        Tree *path = session.BFS(start);
+        int target = path->traceTree();
+        session.getGraph().removeEdges(target);
+        delete path;
+    }
+}
 
 Virus::Virus(int nodeInd): nodeInd(nodeInd) {}
 Agent * Virus::clone() const {return new Virus(nodeInd);}
