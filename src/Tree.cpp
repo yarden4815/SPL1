@@ -6,6 +6,14 @@
 
 
 Tree::Tree(int rootLabel): node(rootLabel),children(std::vector<Tree*>()){}
+Tree::~Tree()  {
+    clear();
+}
+void Tree::clear() {
+    for(int i = 0; i < children.size(); i++){
+        delete children[i];
+    }
+}
 
 int Tree::getNode() const {return node;}
 std::vector<Tree *> Tree::getChildren() {return children;}

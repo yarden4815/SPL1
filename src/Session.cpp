@@ -34,10 +34,16 @@ Session::Session(const std::string &path) : g(std::vector<std::vector<int>>()),t
         treeType = Cycle;
     else
         treeType = Root;
-
-
-
     }
+
+    Session::~Session() {
+        clear();
+    }
+    void Session::clear() {
+        for(int i = 0; i < agents.size(); i++){
+            delete agents[i];
+        }
+}
     void Session::simulate() {
      bool isRunning = true;
      while(isRunning){
