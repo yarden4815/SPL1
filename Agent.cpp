@@ -28,13 +28,11 @@ Virus::Virus(int nodeInd): nodeInd(nodeInd) {
 }
 Agent * Virus::clone() const {return new Virus(nodeInd);}
 void Virus::spreadVirus(Session& session) {
-    int j = 0;
     Graph& graph = session.getGraph();
     std::vector<int> neighbours = graph.getNeighbours(nodeInd);
-    for(int i = 0 ; i < neighbours.size(); i++){
-        if(graph.isCarrier(neighbours[i])) {
+    int j = 0;
+    for(int i = 0 ; i < neighbours.size() && graph.isCarrier(neighbours[i]); i++){
             j++;
-        }
     }
     if(j < neighbours.size()) {
         graph.addToCarry(neighbours[j]);
