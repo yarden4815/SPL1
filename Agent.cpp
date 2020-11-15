@@ -45,11 +45,11 @@ void Virus::spreadVirus(Session& session) {
 }
 void Virus::act(Session &session) {
     Graph& graph = session.getGraph();
-    if(!graph.isCarrier(nodeInd)) {
+/*    if(!graph.isCarrier(nodeInd)) {
         graph.addToCarry(nodeInd);
         spreadVirus(session);
-    }
-    else if(!graph.isInfected(nodeInd)) {
+    }*/
+    if(!graph.isInfected(nodeInd)) {
         graph.infectNode(nodeInd);
         session.enqueueInfected(nodeInd);
         spreadVirus(session);

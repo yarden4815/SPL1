@@ -76,8 +76,8 @@ int CycleTree::traceTree() {
 
     int tempCycle = currCycle;
     Tree *tempChild = this;
-    while (tempCycle > 0 && tempChild->getChildren()[0] != nullptr) {
-        tempChild = children[0];
+    while (tempCycle > 0 && tempChild->getChildren().size() != 0) {
+        tempChild = tempChild->getChildren()[0];
         tempCycle--;
     }
     return tempChild->getNode();
