@@ -59,17 +59,15 @@ Tree & Tree::operator=( Tree &&tree) {
     if(this != &tree){
         clear();
         node = tree.node;
-        children =tree.children;
+        children =move(tree.children);
         tree.node = 0;
-        for(int i = 0; i < children.size(); i++) {
-            tree.children[i] = nullptr;
-        }
     }
     return *this;
 }
 void Tree::setNode(int _node) {
     node = _node;
 }
+int Tree::getRootLabel() {return node;}
 int Tree::getNode() const {return node;}
 std::vector<Tree *> Tree::getChildren() {return children;}
 
@@ -146,17 +144,8 @@ int CycleTree::traceTree() {
     return tempChild->getNode();
 }
 
-Tree::~Tree(){
-    for (int i = 0; i < children.size(); i++){
-        if (children[i])
-            delete children[i];
-    }
-}
 
-Tree::Tree(const Tree &newTree) {
-    node = newTree.getNode();
-    children = newTree.children;
-}
+
 
 
 

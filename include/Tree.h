@@ -23,6 +23,7 @@ public:
     static Tree* createTree(const Session& session, int rootLabel);
     virtual int traceTree()=0;
     void setNode(int _node);
+    int getRootLabel();
 
 protected:
     int node;
