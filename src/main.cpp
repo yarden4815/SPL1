@@ -8,7 +8,10 @@ int main(int argc, char** argv){
    //     cout << "usage cTrace <config_path>" << endl;
      //   return 0;
     //}
-    Session sess("../config4.json");
+
+/*    Session sess("../config4.json");
     sess.simulate();
-    return 0;
+    return 0;*/
+    Tree* ogtree = new MaxRankTree(4);
+    Tree* Tree(ogtree);
 }
