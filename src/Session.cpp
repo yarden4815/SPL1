@@ -4,12 +4,12 @@
 #include <vector>
 #include <string>
 #include <fstream>
-#include "include/Graph.h"
-#include "include/Session.h"
-#include "include/Tree.h"
-#include "include/Agent.h"
+#include "../include/Graph.h"
+#include "../include/Session.h"
+#include "../include/Tree.h"
+#include "../include/Agent.h"
 #include "queue"
-#include "include/json.hpp"
+#include "../include/json.hpp"
 #include "string"
 #include <iostream>
 
@@ -111,13 +111,23 @@ void Session::setGraph(const Graph &graph) {
 }
 TreeType Session::getTreeType() const {return treeType;}
 
-Session::~Session() {
-    for (int i = 0; i < agents.size(); i++){
-        if (agents[i])
-            delete agents[i];
+Session & Session::operator=(const Session &other) {
+    if (this != &other){
+        g = other.g;
+        treeType = other.treeType;
+        currCycle = other.currCycle;
+        for (int i = 0; i < other.agents.size(); i++) {
+            *agents[i] = *(other.agents[i]);
+        }
     }
+    return *this;
 }
 
+Session::Session(const Session &other): g(other.g), currCycle(other.currCycle), treeType(other.treeType) {
+    for (int i = 0; i < other.agents.size(); i++){
+        agents[i] = other.agents[i]->clone();
+    }
+}
 
 
 
