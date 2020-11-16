@@ -4,12 +4,12 @@
 #include <vector>
 #include <string>
 #include <fstream>
-#include "Graph.h"
-#include "Session.h"
-#include "Tree.h"
-#include "Agent.h"
+#include "include/Graph.h"
+#include "include/Session.h"
+#include "include/Tree.h"
+#include "include/Agent.h"
 #include "queue"
-#include "json.hpp"
+#include "include/json.hpp"
 #include "string"
 #include <iostream>
 
@@ -34,10 +34,16 @@ Session::Session(const std::string &path) : g(std::vector<std::vector<int>>()),t
         treeType = Cycle;
     else
         treeType = Root;
-
-
-
     }
+
+    Session::~Session() {
+        clear();
+    }
+    void Session::clear() {
+        for(int i = 0; i < agents.size(); i++){
+            delete agents[i];
+        }
+}
     void Session::simulate() {
      bool isRunning = true;
      while(isRunning){
@@ -48,7 +54,6 @@ Session::Session(const std::string &path) : g(std::vector<std::vector<int>>()),t
         if(agents.size() == OGSize)
             isRunning = false;
         currCycle++;
-         std::cout<<agents.size()<<std::endl;
     }
         std::vector<int> numInfected;
         for(int i = 0; i < g.getSize(); i++) {
@@ -58,9 +63,8 @@ Session::Session(const std::string &path) : g(std::vector<std::vector<int>>()),t
         nlohmann::json output;
         output["graph"]=g.getEdges();
         output["infected"]=numInfected;
-        std::ofstream file("../output.json");
+        std::ofstream file("./output.json");
         file << output;
-        std::cout<<"end run"<<std::endl;
 
 }
 void Session::enqueueInfected(int node) {

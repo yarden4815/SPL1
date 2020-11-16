@@ -1,5 +1,5 @@
-#include "Session.h"
-#include "Agent.h"
+#include "include/Session.h"
+#include "include/Agent.h"
 #include <iostream>
 
 Agent::Agent() {}
@@ -10,31 +10,23 @@ Agent * ContactTracer::clone() const {return new ContactTracer();}
 void ContactTracer::act(Session &session) {
     Graph& graph = session.getGraph();
     if (!graph.getInfectedQueue().empty()) {
-        std::cout<<"contact tracer act"<<std::endl;
         int start = session.dequeueInfected();
-        std::cout<<"before bfs"<<std::endl;
         Tree *path = session.BFS(start);
-        std::cout<<"after bfs"<<std::endl;
         int target = path->traceTree();
-        std::cout<<"after trace tree"<<std::endl;
         session.getGraph().removeEdges(target);
         delete path;
-        std::cout<<"finished contact tracer act"<<std::endl;
     }
 }
 
-Virus::Virus(int nodeInd): nodeInd(nodeInd) {
+Virus::Virus(int nodeInd): nodeInd(nodeInd) {}
 
-}
 Agent * Virus::clone() const {return new Virus(nodeInd);}
 void Virus::spreadVirus(Session& session) {
-    int j = 0;
     Graph& graph = session.getGraph();
     std::vector<int> neighbours = graph.getNeighbours(nodeInd);
-    for(int i = 0 ; i < neighbours.size(); i++){
-        if(graph.isCarrier(neighbours[i])) {
+    int j = 0;
+    for(int i = 0 ; i < neighbours.size() && graph.isCarrier(neighbours[i]); i++){
             j++;
-        }
     }
     if(j < neighbours.size()) {
         graph.addToCarry(neighbours[j]);
@@ -45,10 +37,6 @@ void Virus::spreadVirus(Session& session) {
 }
 void Virus::act(Session &session) {
     Graph& graph = session.getGraph();
-/*    if(!graph.isCarrier(nodeInd)) {
-        graph.addToCarry(nodeInd);
-        spreadVirus(session);
-    }*/
     if(!graph.isInfected(nodeInd)) {
         graph.infectNode(nodeInd);
         session.enqueueInfected(nodeInd);

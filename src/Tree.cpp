@@ -1,11 +1,19 @@
-#include "Tree.h"
-#include "Graph.h"
-#include "Session.h"
+#include "include/Tree.h"
+#include "include/Graph.h"
+#include "include/Session.h"
 #include <iostream>
 
 
 
 Tree::Tree(int rootLabel): node(rootLabel),children(std::vector<Tree*>()){}
+Tree::~Tree()  {
+    clear();
+}
+void Tree::clear() {
+    for(int i = 0; i < children.size(); i++){
+        delete children[i];
+    }
+}
 
 int Tree::getNode() const {return node;}
 std::vector<Tree *> Tree::getChildren() {return children;}
