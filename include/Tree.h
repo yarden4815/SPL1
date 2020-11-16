@@ -9,7 +9,12 @@ class Tree{
 public:
     Tree(int rootLabel);
     virtual ~Tree();
+    Tree(const Tree &tree);
+    Tree & operator=(const Tree &tree);
+    Tree(Tree &&tree);
+    Tree & operator=(const Tree &&tree);
     void clear();
+    std::vector<Tree*> copyChildren() const;
     void addChild(const Tree& child);
     void addChild(Tree* child);
     int getNode() const;

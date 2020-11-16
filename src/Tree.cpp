@@ -14,6 +14,52 @@ void Tree::clear() {
         delete children[i];
     }
 }
+Tree::Tree(const Tree &tree) : node(tree.node){
+
+    for(int i = 0 ; i < tree.children.size(); i++){
+       children.push_back(tree.children[i]->clone());
+       children[i]->getChildren() = tree.children[i]->copyChildren();
+    }
+
+}
+std::vector<Tree *> Tree::copyChildren() const {
+    std::vector<Tree *> copyChildren(children.size());
+    for (int i = 0; i < children.size(); i++) {
+        copyChildren[i] = children[i]->clone();
+        copyChildren[i]->children = children[i]->copyChildren();
+    }
+    return copyChildren;
+}
+Tree & Tree::operator=(const Tree &tree) {
+    if(this == &tree)
+        return *this;
+    clear();
+    node = tree.node;
+    for(int i = 0 ; i < tree.children.size(); i++){
+        children.push_back(tree.children[i]->clone());
+        children[i]->getChildren() = tree.children[i]->copyChildren();
+    }
+    return *this;
+
+}
+Tree::Tree(Tree &&tree): node(tree.node),children(tree.children) {
+    tree.node = 0;
+    for(int i = 0; i < children.size(); i++){
+        children[i] = nullptr;
+    }
+}
+Tree & Tree::operator=(const Tree &&tree) {
+    if(this != &tree){
+        clear();
+        node = tree.node;
+        children = tree.children;
+        tree.node = 0;
+        for(int i = 0; i < children.size(); i++){
+            children[i] = nullptr;
+        }
+    }
+    return *this;
+}
 
 int Tree::getNode() const {return node;}
 std::vector<Tree *> Tree::getChildren() {return children;}
