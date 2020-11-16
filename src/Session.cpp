@@ -20,7 +20,7 @@ Session::Session(const std::string &path) : g(std::vector<std::vector<int>>()),t
     file >> j;
     g = Graph(j["graph"]);
     std::string tType = (std:: string)j["tree"];
-    for(int i = 0; i < j["agents"].size(); i++) {
+    for(int i = 0; i < (int)j["agents"].size(); i++) {
         if (j["agents"][i][0] == "V") {
             agents.push_back(new Virus(j["agents"][i][1]));
             g.addToCarry(j["agents"][i][1]);
@@ -40,14 +40,14 @@ Session::Session(const std::string &path) : g(std::vector<std::vector<int>>()),t
         clear();
     }
     void Session::clear() {
-        for(int i = 0; i < agents.size(); i++){
+        for(int i = 0; i < (int)agents.size(); i++){
             delete agents[i];
         }
     }
     //copy constructor
-Session::Session(const Session &other): g(other.g), currCycle(other.currCycle), treeType(other.treeType),agents() {
-    for (int i = 0; i < other.agents.size(); i++){
-        agents[i] = other.agents[i]->clone();
+Session::Session(const Session &other): g(other.g), treeType(other.treeType),agents(), currCycle(other.currCycle) {
+    for (int i = 0; i < (int)other.agents.size(); i++){
+        agents.push_back(other.agents[i]->clone());
     }
 }
 //copy operator
@@ -59,7 +59,7 @@ Session & Session::operator=(const Session &other) {
         g = other.g;
         treeType = other.treeType;
         currCycle = other.currCycle;
-        for (int i = 0; i < other.agents.size(); i++) {
+        for (int i = 0; i < (int)other.agents.size(); i++) {
             agents.push_back(other.agents[i]->clone());
         }
     return *this;
@@ -67,8 +67,8 @@ Session & Session::operator=(const Session &other) {
 
 
 //move constructor
-Session::Session(Session &&other):g(other.g), currCycle(other.currCycle), treeType(other.treeType), agents(std::vector<Agent*>()) {
-    for (int i = 0; i < other.agents.size(); i++){
+Session::Session(Session &&other):g(other.g),treeType(other.treeType), agents(std::vector<Agent*>()), currCycle(other.currCycle) {
+    for (int i = 0; i < (int)other.agents.size(); i++){
         agents.push_back(other.agents[i]);
         other.agents[i] = nullptr;
     }
@@ -85,11 +85,11 @@ Session & Session::operator=(Session &&other) {
     void Session::simulate() {
      bool isRunning = true;
      while(isRunning){
-        int OGSize = agents.size();
+        int OGSize = (int)agents.size();
         for(int i = 0; i < OGSize; i++){
             agents[i]->act(*this);
         }
-        if(agents.size() == OGSize)
+        if((int)agents.size() == OGSize)
             isRunning = false;
         currCycle++;
     }
@@ -106,9 +106,7 @@ Session & Session::operator=(Session &&other) {
 
 }
 void Session::enqueueInfected(int node) {
-
     g.setInfected(node);
-    int k = 0;
 }
 int Session::dequeueInfected() {
     int front = g.takeInfected();
@@ -129,7 +127,7 @@ Tree * Session::BFS(int node) {
         Tree* temp = queue.front();
         queue.pop();
         neighbours = g.getNeighbours(temp->getNode());
-        for(int i = 0; i < neighbours.size(); i++){
+        for(int i = 0; i < (int)neighbours.size(); i++){
 
             if(!visited[neighbours[i]]) {
                 Tree *child = Tree::createTree(*this, neighbours[i]);

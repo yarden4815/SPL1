@@ -11,14 +11,14 @@ Tree::~Tree()  {
     clear();
 }
 void Tree::clear() {
-    for(int i = 0; i < children.size(); i++){
+    for(int i = 0; i < (int)children.size(); i++){
         delete children[i];
     }
 }
 //copy constructor
 Tree::Tree(const Tree &tree) : node(tree.node),children(){
 
-    for(int i = 0 ; i < tree.children.size(); i++){
+    for(int i = 0 ; i < (int)tree.children.size(); i++){
        children.push_back(tree.children[i]->clone());
        children[i]->getChildren() = tree.children[i]->copyChildren();
     }
@@ -26,8 +26,8 @@ Tree::Tree(const Tree &tree) : node(tree.node),children(){
 }
 
 std::vector<Tree *> Tree::copyChildren() const {
-    std::vector<Tree *> copyChildren(children.size());
-    for (int i = 0; i < children.size(); i++) {
+    std::vector<Tree *> copyChildren((int)children.size());
+    for (int i = 0; i < (int)children.size(); i++) {
         copyChildren[i] = children[i]->clone();
         copyChildren[i]->children = children[i]->copyChildren();
     }
@@ -39,7 +39,7 @@ Tree & Tree::operator=(const Tree &tree) {
         return *this;
     clear();
     node = tree.node;
-    for(int i = 0 ; i < tree.children.size(); i++){
+    for(int i = 0 ; i < (int)tree.children.size(); i++){
         children.push_back(tree.children[i]->clone());
         children[i]->getChildren() = tree.children[i]->copyChildren();
     }
@@ -49,7 +49,7 @@ Tree & Tree::operator=(const Tree &tree) {
 //move constructor
 Tree::Tree(Tree &&tree): node(tree.node),children(std::vector<Tree*>()) {
     tree.node = 0;
-    for(int i = 0; i < children.size(); i++){
+    for(int i = 0; i < (int)children.size(); i++){
         children.push_back(tree.children[i]->clone());
         children[i] = nullptr;
     }
@@ -102,12 +102,12 @@ int MaxRankTree::traceTree() {
         Tree* temp = queue.front();
         queue.pop();
         std::vector<Tree*> child=temp->getChildren();
-        if(child.size() > maxRank) {
-            maxRank = child.size();
+        if((int)child.size() > maxRank) {
+            maxRank = (int)child.size();
             maxNode = temp->getNode();
 
         }
-        for(int i = 0; i < child.size(); i++){
+        for(int i = 0; i < (int)child.size(); i++){
              {
                 queue.push(child[i]);
             }
@@ -137,7 +137,7 @@ int CycleTree::traceTree() {
 
     int tempCycle = currCycle;
     Tree *tempChild = this;
-    while (tempCycle > 0 && tempChild->getChildren().size() != 0) {
+    while (tempCycle > 0 && (int)tempChild->getChildren().size() != 0) {
         tempChild = tempChild->getChildren()[0];
         tempCycle--;
     }

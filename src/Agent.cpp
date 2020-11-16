@@ -4,6 +4,9 @@
 
 Agent::Agent() {}
 
+Agent::~Agent() {
+}
+
 
 ContactTracer::ContactTracer() {}
 Agent * ContactTracer::clone() const {return new ContactTracer();}
@@ -25,10 +28,10 @@ void Virus::spreadVirus(Session& session) {
     Graph& graph = session.getGraph();
     std::vector<int> neighbours = graph.getNeighbours(nodeInd);
     int j = 0;
-    for(int i = 0 ; i < neighbours.size() && graph.isCarrier(neighbours[i]); i++){
+    for(int i = 0 ; i < (int)neighbours.size() && graph.isCarrier(neighbours[i]); i++){
             j++;
     }
-    if(j < neighbours.size()) {
+    if(j < (int)neighbours.size()) {
         graph.addToCarry(neighbours[j]);
         Agent *newVirus = new Virus(neighbours[j]);
         session.addAgent(*newVirus);
