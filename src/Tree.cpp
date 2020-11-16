@@ -1,6 +1,6 @@
-#include "include/Tree.h"
-#include "include/Graph.h"
-#include "include/Session.h"
+#include "../include/Tree.h"
+#include "../include/Graph.h"
+#include "../include/Session.h"
 #include <iostream>
 
 
