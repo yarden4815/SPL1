@@ -17,6 +17,7 @@ enum TreeType{
 class Session{
 public:
     Session(const std::string& path);
+    Session(const Session &other);
     
     void simulate();
     void addAgent(const Agent& agent);
@@ -28,6 +29,7 @@ public:
     int dequeueInfected();
     TreeType getTreeType() const;
     int getCurrCycle() const;
+    virtual ~Session();
 
     
 private:

@@ -107,6 +107,13 @@ void Session::setGraph(const Graph &graph) {
 }
 TreeType Session::getTreeType() const {return treeType;}
 
+Session::~Session() {
+    for (int i = 0; i < agents.size(); i++){
+        if (agents[i])
+            delete agents[i];
+    }
+}
+
 
 
 

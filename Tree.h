@@ -8,6 +8,7 @@ class Session;
 class Tree{
 public:
     Tree(int rootLabel);
+    Tree(const Tree &newTree);
     void addChild(const Tree& child);
     void addChild(Tree* child);
     int getNode() const;
@@ -15,6 +16,7 @@ public:
     virtual Tree* clone() const = 0;
     static Tree* createTree(const Session& session, int rootLabel);
     virtual int traceTree()=0;
+    virtual ~Tree();
 
 protected:
     int node;
