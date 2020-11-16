@@ -12,7 +12,7 @@ public:
     Tree(const Tree &tree);
     Tree & operator=(const Tree &tree);
     Tree(Tree &&tree);
-    Tree & operator=(const Tree &&tree);
+    Tree & operator=( Tree &&tree);
     void clear();
     std::vector<Tree*> copyChildren() const;
     void addChild(const Tree& child);
@@ -22,6 +22,7 @@ public:
     virtual Tree* clone() const = 0;
     static Tree* createTree(const Session& session, int rootLabel);
     virtual int traceTree()=0;
+    void setNode(int _node);
 
 protected:
     int node;

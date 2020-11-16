@@ -13,7 +13,7 @@
 #include "string"
 #include <iostream>
 
-
+//simple constructor
 Session::Session(const std::string &path) : g(std::vector<std::vector<int>>()),treeType(),agents(),currCycle(0) {
     std:: ifstream file(path);
     nlohmann:: json j;
@@ -35,7 +35,7 @@ Session::Session(const std::string &path) : g(std::vector<std::vector<int>>()),t
     else
         treeType = Root;
     }
-
+    //destructor
     Session::~Session() {
         clear();
     }
@@ -43,6 +43,44 @@ Session::Session(const std::string &path) : g(std::vector<std::vector<int>>()),t
         for(int i = 0; i < agents.size(); i++){
             delete agents[i];
         }
+    }
+    //copy constructor
+Session::Session(const Session &other): g(other.g), currCycle(other.currCycle), treeType(other.treeType),agents() {
+    for (int i = 0; i < other.agents.size(); i++){
+        agents[i] = other.agents[i]->clone();
+    }
+}
+//copy operator
+Session & Session::operator=(const Session &other) {
+    if (this == &other) {
+        return *this;
+    }
+        clear();
+        g = other.g;
+        treeType = other.treeType;
+        currCycle = other.currCycle;
+        for (int i = 0; i < other.agents.size(); i++) {
+            agents.push_back(other.agents[i]->clone());
+        }
+    return *this;
+    }
+
+
+//move constructor
+Session::Session(Session &&other):g(other.g), currCycle(other.currCycle), treeType(other.treeType), agents(std::vector<Agent*>()) {
+    for (int i = 0; i < other.agents.size(); i++){
+        agents.push_back(other.agents[i]);
+        other.agents[i] = nullptr;
+    }
+}
+//move assignment
+Session & Session::operator=(Session &&other) {
+    if(this != &other){
+        clear();
+        g=other.g, currCycle=other.currCycle, treeType=other.treeType;
+        agents = move(other.agents);
+    }
+    return *this;
 }
     void Session::simulate() {
      bool isRunning = true;
@@ -111,23 +149,9 @@ void Session::setGraph(const Graph &graph) {
 }
 TreeType Session::getTreeType() const {return treeType;}
 
-Session & Session::operator=(const Session &other) {
-    if (this != &other){
-        g = other.g;
-        treeType = other.treeType;
-        currCycle = other.currCycle;
-        for (int i = 0; i < other.agents.size(); i++) {
-            *agents[i] = *(other.agents[i]);
-        }
-    }
-    return *this;
-}
 
-Session::Session(const Session &other): g(other.g), currCycle(other.currCycle), treeType(other.treeType) {
-    for (int i = 0; i < other.agents.size(); i++){
-        agents[i] = other.agents[i]->clone();
-    }
-}
+
+
 
 
 
